@@ -89,7 +89,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>test.single.server.test3.AppServer</mainClass>
+                            <mainClass>test.single.server.test3.App3Server</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
