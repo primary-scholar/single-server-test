@@ -50,6 +50,18 @@ public class SkyWalkingTestController {
     public String getRpc3Info(SimpleHttpRequest request, SimpleHttpResponse response) {
         try {
             RpcRequest convert = ConvertUtil.convert(request, RpcRequest.class);
+            String url = "http://localhost:9093/rpc4/info.do?serial=%s";
+            String s = SimpleHttpClient.get(String.format(url, convert.getSerial()));
+            return s;
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    @RequestMapping(value = "/rpc4/info.do")
+    public String getRpc4Info(SimpleHttpRequest request, SimpleHttpResponse response) {
+        try {
+            RpcRequest convert = ConvertUtil.convert(request, RpcRequest.class);
             SchoolSchoolInfo schoolInfo = skyWalkingTestService.getSchoolInfo(convert.getSerial());
             return JSONObject.toJSONString(schoolInfo);
         } catch (Exception e) {
