@@ -41,13 +41,10 @@ public class SkyWalkingTestController {
         try {
             RpcRequest convert = ConvertUtil.convert(request, RpcRequest.class);
             ExecutorService executorService = Executors.newFixedThreadPool(1);
-            Future<String> submit = executorService.submit(new Callable<String>() {
-                @Override
-                public String call() throws Exception {
-                    String url = "http://localhost:9093/rpc3/info.do?serial=%s";
-                    String s = SimpleHttpClient.get(String.format(url, convert.getSerial()));
-                    return s;
-                }
+            Future<String> submit = executorService.submit(() -> {
+                String url = "http://localhost:9093/rpc3/info.do?serial=%s";
+                String s = SimpleHttpClient.get(String.format(url, convert.getSerial()));
+                return s;
             });
             return submit.get();
         } catch (Exception e) {
