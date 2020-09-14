@@ -46,7 +46,9 @@ public class SkyWalkingTestController {
                 String s = SimpleHttpClient.get(String.format(url, convert.getSerial()));
                 return s;
             });
-            return submit.get();
+            String s = submit.get();
+            executorService.shutdown();
+            return s;
         } catch (Exception e) {
             return "";
         }
